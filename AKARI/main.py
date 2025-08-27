@@ -9,7 +9,7 @@ from lib.oakd_yolo import OakdYolo
 
 #バーコード情報送信先のurl
 # パスに/api/scanを指定すること
-resisterUrl =  "http://localhost:3000/api/scan"
+registerUrl =  "http://localhost:3000/api/scan"
 
 class BarcodeScannerApp(OakdYolo):
     def __init__(self, config_path: str, model_path: str, fps: int = 10) -> None:
@@ -36,10 +36,10 @@ class BarcodeScannerApp(OakdYolo):
         if barcode_data == self.last_sent_barcode and (current_time - self.last_sent_time) < 10:
              return False
 
-        print(f"REQUEST: サーバー({resisterUrl})にデータ({barcode_data})を送信します...")
+        print(f"REQUEST: サーバー({registerUrl})にデータ({barcode_data})を送信します...")
         params = {'id': barcode_data}
         try:
-            response = requests.get(resisterUrl, params=params)
+            response = requests.get(registerUrl, params=params)
             if response.status_code == 200:
                 print(f"✅ SUCCESS! 応答: {response.json()}")
                 self.last_sent_barcode = barcode_data
