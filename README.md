@@ -87,7 +87,7 @@ npm run dev
 
 5. node_modules のインストール
 
-カレントディレクトリが/regiser である状態で，以下のコマンドを実行する．
+カレントディレクトリが/register である状態で，以下のコマンドを実行する．
 
 ```bash
 npm install
@@ -110,8 +110,7 @@ brew services start redis
 
 7. データ送信先 url の書き換え
 
-/AKARI/main.py の 12 行目を regiser を実行するコンピュータの IP アドレスをホスト部に持つ url に書き換える．
-また，/regiser/.env.local の NEXT_PUBLIC_DB_WS_URL の値を，db を実行するコンピュータの IP アドレスをホスト部に持つ url に書き換える．
+/AKARI/main.py の 12 行目を register を実行するコンピュータの IP アドレスをホスト部に持つ url に書き換える．
 
 8. バーコードの登録
 
@@ -140,7 +139,7 @@ python3 main.py
 ```
 
 3. 終了する．
-   cont + c,cont + q を押して終了する．
+   ctrl + c,ctrl + q を押して終了する．
 
 ## 使い方
 
