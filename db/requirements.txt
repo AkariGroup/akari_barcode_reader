@@ -1,0 +1,5 @@
+fastapi
+websockets
+contextlib
+sqlite3
+

@@ -37,6 +37,12 @@ pip install -r requirements.txt
 
 ```
 
+/AKARI のみ以下のコマンドを実行する．
+
+```
+sudo apt-get install libzbar0
+```
+
 3. docker のインストール
 
 ### windows の場合
