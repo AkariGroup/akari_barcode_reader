@@ -38,7 +38,7 @@ if __name__ == "__main__":
             sample_data = [
                 ("0000000000000", "サンプル商品A", 100),
                 ("1111111111116", "サンプル商品B", 200),
-                ("1111111111111", "サンプル商品C", 300),
+                ("2222222222222", "サンプル商品C", 300),
             ]
             for product_id, name, price in sample_data:
                 insert_product(product_id, name, price)
