@@ -30,10 +30,19 @@ def insert_product(product_id, name, price):
 if __name__ == "__main__":
     initialize_db()
     while True:
-        line = input("id,name,price を入力してください（終了は 'exit'）：\n")
+        line = input("id,name,price を入力してください（終了は 'exit',サンプルデータは'sampleを入力）：\n")
         if line.strip().lower() == "exit":
             print("終了")
             break
+        elif line.strip().lower() == "sample":
+            sample_data = [
+                ("0000000000000", "サンプル商品A", 100),
+                ("1111111111116", "サンプル商品B", 200),
+                ("1111111111111", "サンプル商品C", 300),
+            ]
+            for product_id, name, price in sample_data:
+                insert_product(product_id, name, price)
+            continue
 
         try:
             product_id, name, price_str = map(str.strip, line.split(","))
