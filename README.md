@@ -104,7 +104,7 @@ npm install
 - windows，Linux の場合
 
 ```bash
-docker run --name my-redis -p 6379:6379 -d redis
+sudo docker run --name my-redis -p 6379:6379 -d redis
 ```
 
 - Mac の場合
