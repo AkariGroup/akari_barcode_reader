@@ -31,7 +31,7 @@ git clone https://github.com/AkariGroup/akari_barcode_reader.git
 
 python3 -m venv venv
 
-.venv/bin/activate
+venv/bin/activate
 
 pip install -r requirements.txt
 
@@ -44,6 +44,8 @@ sudo apt-get install libzbar0
 ```
 
 3. docker のインストール
+
+/registerを実行するpcに，docker及びredisをインストール，実行する
 
 ### windows の場合
 
@@ -79,8 +81,8 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 ```
 
 4. node.js のインストール
-   [node.js の公式サイト](https://nodejs.org/ja/)にアクセスし，手順に沿って node.js および npm のインストールを行う．
-   正常にインストールが完了したかを確認するため，任意のディレクトリ下で以下のコマンドを実行する．
+registerを実行するPCにて，[node.js の公式サイト](https://nodejs.org/ja/)にアクセスし，手順に沿って node.js および npm のインストールを行う．
+正常にインストールが完了したかを確認するため，任意のディレクトリ下で以下のコマンドを実行する．
 
 ```bash
 npx create-next-app@latest my-next-app
@@ -126,26 +128,72 @@ brew services start redis
 python db.py
 ```
 
-標準出力の指示に従い，バーコード(13 桁)，商品名，商品の値段を登録する．プログラムを終了する際は，"exit"と入力する．
+標準出力の指示に従い，バーコード(13 桁)，商品名，商品の値段を登録する．プログラムを終了する際は，"exit"と入力する．サンプル用のバーコードを利用する際は，"sample"と入力する．
 
 ## 起動方法
 
 ### /AKARI
 
-1. 仮想環境の有効化を行う．
+#### /AKARIと/registerを実行するコンピュータが異なる場合
+
+1. コードの変更
+
+同一のLAN内にいることを確認し，/registerを実行するコンピュータのIPアドレスを確認する．
+/AKARIのmain.pyの12行目の文字列を"/http://</registerを実行するコンピュータのIPアドレス>:3000/api/scan/に変更する．
+
+2. 仮想環境の有効化を行う．
+
+以下を実行する．
 
 ```bash
-.venv/bin/activate
+venv/bin/activate
 ```
 
-2. 開始する．
+3. 開始する．
 
 ```bash
 python3 main.py
 ```
 
-3. 終了する．
-   ctrl + c,ctrl + q を押して終了する．
+4. 終了する．
+
+ctrl + c,ctrl + q を押して終了する．
+
+### /register
+
+1. 環境変数の変更
+
+#### /dbと/registerを実行するコンピュータが異なる場合
+同一のLAN内にいることを確認し，/dbを実行するコンピュータのIPアドレスを確認する．
+/register直下の.env.localの2行目をNEXT_PUBLIC_DB_WS_URL=ws://</dbを実行するコンピュータのIPアドレス>:8000/ws
+に変更する．
+
+2. 実行する
+
+/AKARIと/registerを実行するコンピュータが異なる場合は以下を実行する．
+
+```
+npx next dev -H </registerを実行するコンピュータのIPアドレス>
+```
+
+それ以外の場合，以下を実行する
+
+```
+npm run dev
+```
+
+### /db
+
+1. 仮想環境の有効化を行う．
+```bash
+venv/bin/activate
+```
+
+2. 開始する．
+
+```bash
+uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+```
 
 ## 使い方
 
