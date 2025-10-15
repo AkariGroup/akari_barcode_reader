@@ -45,7 +45,7 @@ sudo apt-get install libzbar0
 
 3. docker のインストール
 
-/registerを実行するpcに，docker及びredisをインストール，実行する
+/register を実行する pc に docker 及び redis をインストール，実行する
 
 ### windows の場合
 
@@ -66,7 +66,7 @@ wsl --install
 
 以下のコマンドを実行する．
 
-```
+```bash
 sudo apt update
 sudo apt-get install ca-certificates curl
 sudo install -m 0755 -d /etc/apt/keyrings
@@ -80,8 +80,9 @@ sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
-4. node.js のインストール
-registerを実行するPCにて，[node.js の公式サイト](https://nodejs.org/ja/)にアクセスし，手順に沿って node.js および npm のインストールを行う．
+5. node.js のインストール
+
+register を実行する PC にて，[node.js の公式サイト](https://nodejs.org/ja/)にアクセスし，手順に沿って node.js および npm のインストールを行う．
 正常にインストールが完了したかを確認するため，任意のディレクトリ下で以下のコマンドを実行する．
 
 ```bash
@@ -93,7 +94,7 @@ npm run dev
 
 ブラウザで http://localhost:3000 にアクセスし，Next.js プロジェクトが正常に動作しているかを確認する．
 
-5. node_modules のインストール
+6. node_modules のインストール
 
 カレントディレクトリが/register である状態で，以下のコマンドを実行する．
 
@@ -101,30 +102,54 @@ npm run dev
 npm install
 ```
 
-6. redis のインストール，実行
+7. redis のインストール，実行
 
-- windows，Linux の場合
+### windows，Linux の場合
 
 ```bash
 sudo docker run --name my-redis -p 6379:6379 -d redis
 ```
 
-- Mac の場合
+### Mac の場合
 
 ```bash
 brew install redis
 brew services start redis
 ```
 
-7. データ送信先 url の書き換え
+### Ubuntu,Demian の場合
+
+#### 初めて redis を実行する場合
+
+以下を実行し，redis をインストールし，実行する．
+
+```bash
+docker run --name my-redis -p 6379:6379 -d redis
+```
+
+#### 過去に"my-redis"という名前で実行したことがある場合
+
+以下を実行し，過去に実行したコンテナを削除する．
+
+```bash
+docker rm -f my-redis
+```
+
+その後，もう一度以下を実行し，redis をインストールし，実行する．
+
+```bash
+docker run --name my-redis -p 6379:6379 -d redis
+```
+
+8. データ送信先 url の書き換え
 
 /AKARI/main.py の 12 行目を register を実行するコンピュータの IP アドレスをホスト部に持つ url に書き換える．
 
-8. バーコードの登録
+9. バーコードの登録
 
 データベースを担当するコンピュータの/db にて，db.py を実行する．
 
-```
+```bath
 python db.py
 ```
 
@@ -134,12 +159,12 @@ python db.py
 
 ### /AKARI
 
-#### /AKARIと/registerを実行するコンピュータが異なる場合
+#### /AKARI と/register を実行するコンピュータが異なる場合
 
 1. コードの変更
 
-同一のLAN内にいることを確認し，/registerを実行するコンピュータのIPアドレスを確認する．
-/AKARIのmain.pyの12行目の文字列を"/http://</registerを実行するコンピュータのIPアドレス>:3000/api/scan/に変更する．
+同一の LAN 内にいることを確認し，/register を実行するコンピュータの IP アドレスを確認する．
+/AKARI の main.py の 12 行目の文字列を"/http://</register を実行するコンピュータの IP アドレス>:3000/api/scan/に変更する．
 
 2. 仮想環境の有効化を行う．
 
@@ -163,28 +188,30 @@ ctrl + c,ctrl + q を押して終了する．
 
 1. 環境変数の変更
 
-#### /dbと/registerを実行するコンピュータが異なる場合
-同一のLAN内にいることを確認し，/dbを実行するコンピュータのIPアドレスを確認する．
-/register直下の.env.localの2行目をNEXT_PUBLIC_DB_WS_URL=ws://</dbを実行するコンピュータのIPアドレス>:8000/ws
+#### /db と/register を実行するコンピュータが異なる場合
+
+同一の LAN 内にいることを確認し，/db を実行するコンピュータの IP アドレスを確認する．
+/register 直下の.env.local の 2 行目を NEXT_PUBLIC_DB_WS_URL=ws://</db を実行するコンピュータの IP アドレス>:8000/ws
 に変更する．
 
 2. 実行する
 
-/AKARIと/registerを実行するコンピュータが異なる場合は以下を実行する．
+/AKARI と/register を実行するコンピュータが異なる場合は以下を実行する．
 
-```
+```bash
 npx next dev -H </registerを実行するコンピュータのIPアドレス>
 ```
 
 それ以外の場合，以下を実行する
 
-```
+```bash
 npm run dev
 ```
 
 ### /db
 
 1. 仮想環境の有効化を行う．
+
 ```bash
 venv/bin/activate
 ```

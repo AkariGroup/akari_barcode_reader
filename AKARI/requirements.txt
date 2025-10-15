@@ -2,3 +2,4 @@ opencv-python
 pyzbar
 requests
 akari-client[depthai]
+tqdm
